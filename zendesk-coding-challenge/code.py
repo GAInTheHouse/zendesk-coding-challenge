@@ -5,7 +5,6 @@ import os
 
 pd.set_option("display.max_rows", None, "display.max_columns", None)
 
-
 # api-endpoint
 URL = "https://zccgainthehouse.zendesk.com/api/v2/tickets.json"
 
@@ -37,9 +36,6 @@ for i in columns:
     if typ==type(None): 
         df=df.drop(i, axis=1)
 
-
-        
-
 choice=0
 id=0        
         
@@ -48,8 +44,7 @@ while True:
     print("Hello! user choose your tool")
     print("-> Press 1 to view all tickets")
     print("-> Press 2 to view a particular ticket")
-    print("-> Press 3 to exit",end=' ')
-    
+    print("-> Press 3 to exit",end=' ')    
 
     p = input()
 
@@ -62,7 +57,7 @@ while True:
         print("Please enter ticket id")
         choice=2
         id=int(input())
-    elif (("quit" in p) or ("exit" in p) or ("stop" in p) or ("close" in p) or ("deactivate" in p) or ("terminate" in p) or (p=="3")):
+    elif ((p=="3")):
         print("Thank You!")
         break
     else :
@@ -71,7 +66,7 @@ while True:
         print(df)
         choice=0
     if choice == 2:
-        data=df.loc[df["id"]==id]
+        data=df.loc[df.index==id]
         print(data)
         choice=0
         id=0
