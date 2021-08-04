@@ -1,5 +1,4 @@
 import pytest
-from main import *
 import pandas as pd
 from flask import Flask, request, jsonify, Response
 import re
@@ -11,6 +10,7 @@ from requests.auth import HTTPBasicAuth
 import os
 from bs4 import BeautifulSoup
 import main
+
 
 ##TODO: Test All Functions Individuals
 ##TODO: Test the integrations - If a next button is clicked, does it work?
@@ -26,7 +26,7 @@ def test_home(name):
     main.password=name[1]
     with open("index.html") as f:
         html = f.read()
-    htmlObj=home()
+    htmlObj=main.home()
     assert(main.page==0)
     assert(htmlObj==html)
 
@@ -35,11 +35,11 @@ def test_get_all_data():
     # api-endpoint
     URL = "https://zccgainthehouse.zendesk.com/api/v2/tickets.json"
     # sending get request and saving the response as response object
-    r = requests.get(url = URL,auth = HTTPBasicAuth(main.usename, main.password))
+    r = requests.get(url = URL,auth = HTTPBasicAuth(main.username, main.password))
     # extracting data in json format
     data = r.json()
     df=pd.DataFrame(data["tickets"])
-    assert len(get_all_data())==len(df)
+    assert len(main.get_all_data())==len(df)
 
 #Test if there's 1 table with 25 rows
 def test_all_tickets_01():

@@ -1,15 +1,12 @@
 import pandas as pd
 from flask import Flask, request, jsonify, Response
 import re
-import matplotlib
-from matplotlib import pyplot as plt
 from io import StringIO
 import requests
 from requests.auth import HTTPBasicAuth
 import os
 import sys
 
-matplotlib.use('Agg')
 
 app = Flask(__name__)
 id = 0
@@ -40,16 +37,14 @@ def all_tickets():
         html = str(f.read())
     
     global page
-    print(page)
+    
     df=get_all_data()
     if type(df)==str:
         return html.replace("{}",df) 
     limit=int(len(df.index)/25)
-    print(limit)
+    
     if(len(df.index)%25!=0):
         limit+=1
-    print(limit)    
-    
         
     if page == limit:
         df=df.loc[(page-1)*25+1:,:]
@@ -113,14 +108,18 @@ def printitems(dictObj, indent=0):
     return '\n'.join(p)
 
 def get_one_ticket():
-    
-    URL = "https://zccgainthehouse.zendesk.com/api/v2/tickets/"+str(id)
-    # sending get request and saving the response as response object
-    r = requests.get(url = URL,auth = HTTPBasicAuth(username, password))
-
-    # extracting data in json format
-    data = r.json()
-    data=data["ticket"]
+    try:
+        URL = "https://zccgainthehouse.zendesk.com/api/v2/tickets/"+str(id)
+        # sending get request and saving the response as response object
+        r = requests.get(url = URL,auth = HTTPBasicAuth(username, password))
+        # extracting data in json format
+        data = r.json()
+    except:
+        return "API unavailable"
+    try:
+        data=data["ticket"]
+    except:
+        return "Data extraction error. Please check credentials."
     data.pop('raw_subject')
     htmlObj=printitems(data)
     return htmlObj
@@ -133,12 +132,15 @@ def get_all_data():
         URL = "https://zccgainthehouse.zendesk.com/api/v2/tickets.json"
         # sending get request and saving the response as response object
         r = requests.get(url = URL,auth = HTTPBasicAuth(username, password))
+        # extracting data in json format
+        data = r.json()
     except:
-        return "API Authentication Error/API unavailable"
-
-    # extracting data in json format
-    data = r.json()
-    df=pd.DataFrame(data["tickets"])
+        return "API unavailable"
+    
+    try:
+        df=pd.DataFrame(data["tickets"])
+    except:
+        return "Data extraction error. Please check credentials."
 
     df=df.set_index('id')
     df=df.dropna(axis='columns')

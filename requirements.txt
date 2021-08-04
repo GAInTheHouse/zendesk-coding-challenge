@@ -1,0 +1,6 @@
+pytest
+pandas
+flask
+matplotlib
+requests
+bs4
