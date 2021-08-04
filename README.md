@@ -2,7 +2,7 @@
 
 To run this project, python needs to be installed.
 
-This project was developed on [GCC 8.4.0] linux with Python 3.6.9.
+This project was developed on linux [GCC 8.4.0] with Python 3.6.9.
 
 This project also utilizes several python libraries that need to be installed externally. These can be installed using pip. 
 
@@ -23,6 +23,13 @@ To run the code, open the command line interface, and run:
 python3 main.py USERNAME PASSWORD
 
 ```
+
+Use the web adress generated on the terminal and go to the ticket viewing platform.
+
+To view all the tickets, click on "Browse all tickets"
+
+To view details of a particluar ticket, enter the ticket id in the form, and hit submit. Upon confirmation from the pop-up, click on "Show the ticket"
+
 
 To test this code, open the command line interface, and run:
 
