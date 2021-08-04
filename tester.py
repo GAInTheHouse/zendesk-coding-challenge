@@ -2,8 +2,6 @@ import pytest
 import pandas as pd
 from flask import Flask, request, jsonify, Response
 import re
-import matplotlib
-from matplotlib import pyplot as plt
 from io import StringIO
 import requests
 from requests.auth import HTTPBasicAuth
