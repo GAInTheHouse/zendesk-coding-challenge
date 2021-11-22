@@ -45,7 +45,6 @@ def all_tickets():
     
     if(len(df.index)%25!=0):
         limit+=1
-        
     if page == limit:
         df=df.loc[(page-1)*25+1:,:]
         html=html.replace("next","page 1")
@@ -109,7 +108,7 @@ def printitems(dictObj, indent=0):
 
 def get_one_ticket():
     try:
-        URL = "https://zccgainthehouse.zendesk.com/api/v2/tickets/"+str(id)
+        URL = "https://zccga.zendesk.com/api/v2/tickets/"+str(id)
         # sending get request and saving the response as response object
         r = requests.get(url = URL,auth = HTTPBasicAuth(username, password))
         # extracting data in json format
@@ -129,7 +128,7 @@ def get_one_ticket():
 def get_all_data():
     # api-endpoint
     try:
-        URL = "https://zccgainthehouse.zendesk.com/api/v2/tickets.json"
+        URL = "https://zccga.zendesk.com/api/v2/tickets.json"
         # sending get request and saving the response as response object
         r = requests.get(url = URL,auth = HTTPBasicAuth(username, password))
         # extracting data in json format

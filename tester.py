@@ -31,7 +31,7 @@ def test_home(name):
 #Checks the length of the df returned by the helper function
 def test_get_all_data():
     # api-endpoint
-    URL = "https://zccgainthehouse.zendesk.com/api/v2/tickets.json"
+    URL = "https://zccga.zendesk.com/api/v2/tickets.json"
     # sending get request and saving the response as response object
     r = requests.get(url = URL,auth = HTTPBasicAuth(main.username, main.password))
     # extracting data in json format

@@ -45,6 +45,6 @@ This project has also been deployed as a background process in the development e
 
 ```
 
-http://146.148.93.178:5000/
+http://34.121.213.74:5000/
 
 ```
